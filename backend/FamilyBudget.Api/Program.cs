@@ -1,12 +1,13 @@
 using Family_Budget_API.Data;
+using Family_Budget_API.Endpoints;
 using Family_Budget_API.Middlewares;
 using Family_Budget_API.Repositories;
 using Family_Budget_API.Repositories.Interfaces;
 using Family_Budget_API.Services;
 using Family_Budget_API.Services.Interfaces;
 using FluentValidation;
-using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,21 +27,18 @@ builder.Services.AddScoped<ITransactionService, TransactionService>();
 builder.Services.AddScoped<ISummaryService, SummaryService>();
 
 // ---------------------------------------------------------------------------
-// FluentValidation: auto-validates request DTOs on model binding
+// FluentValidation: validators are injected into Minimal API handlers
 // ---------------------------------------------------------------------------
-builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 // ---------------------------------------------------------------------------
-// Controllers + JSON serialization configuration
+// JSON serialization configuration for Minimal APIs
 // ---------------------------------------------------------------------------
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        // Serialize enums as strings (e.g., "Expense" instead of 0)
-        options.JsonSerializerOptions.Converters.Add(
-            new System.Text.Json.Serialization.JsonStringEnumConverter());
-    });
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    // Serialize enums as strings (e.g., "Expense" instead of 0)
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 // ---------------------------------------------------------------------------
 // OpenAPI / Swagger
@@ -79,7 +77,9 @@ app.UseCors("AllowFrontend");
 
 app.UseHttpsRedirection();
 
-app.MapControllers();
+app.MapPersonEndpoints();
+app.MapTransactionEndpoints();
+app.MapSummaryEndpoints();
 
 // ---------------------------------------------------------------------------
 // Auto-apply pending EF Core migrations on startup
