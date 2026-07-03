@@ -174,6 +174,7 @@ O frontend estará disponível em `http://localhost:3000`.
 │   ├── Dockerfile               # Build da imagem Docker
 │   └── appsettings.json         # Configurações
 ├── frontend/                   # Frontend em React
+│   ├── public/                 # Arquivos estáticos (favicon)
 │   ├── src/
 │   │   ├── components/         # Componentes da UI
 │   │   ├── services/           # Camada de API
@@ -181,6 +182,7 @@ O frontend estará disponível em `http://localhost:3000`.
 │   │   ├── types.ts            # Tipos TypeScript
 │   │   ├── App.tsx             # Componente principal
 │   │   └── main.tsx            # Entry point
+│   ├── Dockerfile              # Build da imagem Docker
 │   ├── package.json
 │   └── vite.config.ts
 └── docker-compose.yml          # Orquestração dos containers
