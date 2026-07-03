@@ -151,7 +151,7 @@ export default function PersonList({ people, loading, onPersonDeleted }: PersonL
               </div>
             </div>
 
-            <div className="space-y-3 bg-slate-50 rounded-lg p-3.5 border border-slate-150 text-sm">
+            <div className="space-y-3 bg-slate-50 rounded-lg p-3.5 border border-slate-200 text-sm">
               <p className="text-slate-800">
                 Tem certeza que deseja excluir <span className="font-bold text-slate-900">{deleteTarget.name}</span>?
               </p>

@@ -75,7 +75,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowFrontend");
 
-app.UseHttpsRedirection();
+// Redirecionamento HTTPS é desabilitado no Docker pois a API roda apenas HTTP.
+// Em produção atrás de um proxy reverso (nginx), o próprio proxy faz o TLS termination.
+if (!app.Environment.IsEnvironment("Docker"))
+{
+    app.UseHttpsRedirection();
+}
 
 app.MapPersonEndpoints();
 app.MapTransactionEndpoints();
