@@ -7,7 +7,7 @@ import TransactionForm from "./components/TransactionForm";
 import TransactionList from "./components/TransactionList";
 import { apiService, isDemoModeEnabled, setDemoMode, ApiError } from "./services/api";
 import { Person, Transaction, Summary } from "./types";
-import { AlertCircle, HelpCircle, FileText, CheckCircle2 } from "lucide-react";
+import { AlertCircle, HelpCircle, CheckCircle2 } from "lucide-react";
 
 /**
  * Main application component coordinating the residential expense tracker state.
@@ -127,33 +127,6 @@ export default function App() {
             )}
           </div>
         )}
-
-        {/* DOCUMENTAÇÃO DO CÓDIGO (Objetivo: Deixar claro qual foi a lógica/função do que foi desenvolvido) */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-          <h2 className="text-sm font-bold text-slate-800 flex items-center gap-2 mb-2">
-            <FileText className="h-4.5 w-4.5 text-blue-600" />
-            Documentação da Lógica & Regras de Negócio
-          </h2>
-          <div className="text-xs text-slate-600 space-y-2 leading-relaxed">
-            <p>
-              Este frontend foi desenvolvido seguindo as mais estritas boas práticas de desenvolvimento em <strong>React com TypeScript e Tailwind CSS</strong>. Abaixo estão detalhadas as implementações das regras de negócio especificadas:
-            </p>
-            <ul className="list-disc list-inside space-y-1.5 pl-1 text-slate-700 font-semibold">
-              <li>
-                <span className="text-blue-600 font-bold">Cadastro de Pessoas:</span> Permite criação, exclusão e listagem de moradores. Quando uma pessoa é excluída, um overlay de confirmação alerta sobre a <strong className="text-rose-600 font-bold">deleção em cascata</strong> de todas as transações daquela pessoa no backend.
-              </li>
-              <li>
-                <span className="text-blue-600 font-bold">Cadastro de Transações:</span> Bloqueia de forma proativa receitas para menores de 18 anos. Ao selecionar um menor no formulário, a opção "Receita" é desabilitada e a transação é forçada para "Despesa", além de exibir uma mensagem orientativa.
-              </li>
-              <li>
-                <span className="text-blue-600 font-bold">Consulta de Totais:</span> A tela consolida o saldo líquido individual (Receitas - Despesas) e exibe, no rodapé da tabela, o <strong className="text-slate-900 font-extrabold">Total Geral Consolidado</strong> somando todas as contas do domicílio.
-              </li>
-              <li>
-                <span className="text-blue-600 font-bold">Persistência e Tolerância a Falhas:</span> Caso o backend em .NET não esteja ativo localmente no endereço <code className="bg-slate-100 px-1.5 py-0.5 rounded font-mono text-slate-800">http://localhost:8080</code>, o usuário pode alternar com um único clique para o <strong>Modo Demo</strong>, que simula o comportamento da API persistindo os dados em <code className="bg-slate-100 px-1.5 py-0.5 rounded font-mono text-slate-800">localStorage</code>.
-              </li>
-            </ul>
-          </div>
-        </div>
 
         {/* 1. SEÇÃO DE CONSULTA DE TOTAIS (Consolidated Dashboard) */}
         <Dashboard summary={summary} loading={loading} />
