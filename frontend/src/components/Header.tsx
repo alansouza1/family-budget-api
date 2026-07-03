@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState, useEffect } from "react";
 import { Settings, Wifi, WifiOff, RefreshCw, HelpCircle } from "lucide-react";
 import { getApiBaseUrl, setApiBaseUrl, isDemoModeEnabled, setDemoMode } from "../services/api";

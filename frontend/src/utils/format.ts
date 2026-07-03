@@ -1,9 +1,4 @@
 /**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-/**
  * Formats a number as Brazilian Real (BRL) currency
  */
 export function formatCurrency(value: number): string {

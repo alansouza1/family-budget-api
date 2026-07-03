@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { Person, Transaction, Summary, PersonSummary, TransactionType } from "../types";
 
 // Base API URL. Can be customized via environment variable or in-app settings.

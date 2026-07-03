@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { useState, useEffect, useCallback } from "react";
 import Header from "./components/Header";
 import Dashboard from "./components/Dashboard";

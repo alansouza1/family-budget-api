@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { Summary } from "../types";
 import { formatCurrency } from "../utils/format";
 import { ArrowUpRight, ArrowDownRight, Wallet, Users, Info } from "lucide-react";
