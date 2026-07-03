@@ -36,5 +36,18 @@ services:
       postgres:
         condition: service_healthy
 
+  # --------------------------------------------------------------------------
+  # React Frontend
+  # --------------------------------------------------------------------------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: family-budget-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+
 volumes:
   pgdata:
