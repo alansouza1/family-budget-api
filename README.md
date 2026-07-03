@@ -5,6 +5,7 @@ Sistema de controle de gastos residenciais com cadastro de pessoas, transações
 ## Tecnologias
 
 - **Backend**: .NET 10 com C# (ASP.NET Core Web API)
+- **Frontend**: React 19 com TypeScript e Tailwind CSS
 - **Banco de Dados**: PostgreSQL 17 (via Docker)
 - **ORM**: Entity Framework Core
 - **Validação**: FluentValidation
@@ -38,13 +39,14 @@ As rotas ficam separadas em módulos de endpoints para manter o `Program.cs` lim
 
 - [Docker](https://docs.docker.com/get-docker/) e [Docker Compose](https://docs.docker.com/compose/install/)
 
-### Subindo a aplicação
+### Subindo tudo com Docker (recomendado)
 
 ```bash
 docker compose up -d
 ```
 
-A API estará disponível em `http://localhost:8080`.
+- Backend: `http://localhost:8080`
+- Frontend: `http://localhost:3000`
 
 ### Parando a aplicação
 
@@ -52,7 +54,9 @@ A API estará disponível em `http://localhost:8080`.
 docker compose down
 ```
 
-### Desenvolvimento local (sem Docker para a API)
+### Desenvolvimento local (sem Docker)
+
+#### Backend
 
 1. Suba apenas o PostgreSQL:
 ```bash
@@ -64,6 +68,20 @@ docker compose up -d postgres
 cd backend/FamilyBudget.Api
 dotnet run
 ```
+
+A API estará disponível em `http://localhost:8080`.
+
+#### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+O frontend estará disponível em `http://localhost:3000`.
+
+> O frontend tenta conectar ao backend em `http://localhost:8080`. Caso o backend não esteja ativo, o próprio frontend oferece um Modo Demo offline para testes.
 
 ## Endpoints da API
 
@@ -137,23 +155,33 @@ dotnet run
 ## Estrutura do Projeto
 
 ```
-backend/FamilyBudget.Api/
-├── Data/                   # DbContext e Migrations
-├── Dtos/                   # Objetos de request/response
-│   ├── Person/
-│   ├── Summary/
-│   └── Transaction/
-├── Endpoints/              # Minimal APIs agrupadas por recurso
-├── Middlewares/             # Tratamento global de erros
-├── Models/                  # Entidades do domínio
-│   └── Enums/
-├── Repositories/            # Acesso a dados
-│   └── Interfaces/
-├── Services/                # Regras de negócio
-│   └── Interfaces/
-├── Validators/              # Validações FluentValidation
-├── Program.cs               # Configuração e startup
-├── Dockerfile               # Build da imagem Docker
-└── appsettings.json         # Configurações
-docker-compose.yml           # Orquestração dos containers
+├── backend/FamilyBudget.Api/   # API em .NET 10
+│   ├── Data/                   # DbContext e Migrations
+│   ├── Dtos/                   # Objetos de request/response
+│   │   ├── Person/
+│   │   ├── Summary/
+│   │   └── Transaction/
+│   ├── Endpoints/              # Minimal APIs agrupadas por recurso
+│   ├── Middlewares/             # Tratamento global de erros
+│   ├── Models/                  # Entidades do domínio
+│   │   └── Enums/
+│   ├── Repositories/            # Acesso a dados
+│   │   └── Interfaces/
+│   ├── Services/                # Regras de negócio
+│   │   └── Interfaces/
+│   ├── Validators/              # Validações FluentValidation
+│   ├── Program.cs               # Configuração e startup
+│   ├── Dockerfile               # Build da imagem Docker
+│   └── appsettings.json         # Configurações
+├── frontend/                   # Frontend em React
+│   ├── src/
+│   │   ├── components/         # Componentes da UI
+│   │   ├── services/           # Camada de API
+│   │   ├── utils/              # Utilitários
+│   │   ├── types.ts            # Tipos TypeScript
+│   │   ├── App.tsx             # Componente principal
+│   │   └── main.tsx            # Entry point
+│   ├── package.json
+│   └── vite.config.ts
+└── docker-compose.yml          # Orquestração dos containers
 ```
